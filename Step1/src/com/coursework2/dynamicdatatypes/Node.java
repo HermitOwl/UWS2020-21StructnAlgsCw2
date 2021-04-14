@@ -1,25 +1,25 @@
 package com.coursework2.dynamicdatatypes;
 
 public class Node {
-	private Object payload;
+	private Comparable payload;
 	private Node branchA;
 	private Node branchB;
 
 	
 	
-	public Node(Object payload)
+	public Node(Comparable payload)
 	{
 		this.payload = payload;
 		branchA = null;
 		branchB = null;
 	}
 	
-	public Object getPayload() 
+	public Comparable getPayload() 
 	{
 		return payload;
 	}
 	
-	public void setPayload(Object payload) 
+	public void setPayload(Comparable payload) 
 	{
 		this.payload = payload;
 	}
@@ -52,6 +52,23 @@ public class Node {
 	public Node getBranchB()
 	{
 		return branchB;
+	}
+	
+	public void insert(Node x) 
+	{
+		//TODO: Complete this!! 
+		/**
+		 * Implement this at node level
+		 *  basic condition 
+		 *   if (x.payload < this.payload)
+		 *   	if (BranchA == null)
+		 *   		BranchA = x;
+		 *   	Else branchA.insert(x);
+		 *   Else if (x.paylaod > this.payload)
+		 *   	if(BranchB== null)
+		 *   		BranchB = x;
+		 *   Else branchB.insert(x);
+		 */
 	}
 	
 	@Override

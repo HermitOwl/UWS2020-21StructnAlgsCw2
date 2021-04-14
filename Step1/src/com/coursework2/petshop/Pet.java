@@ -1,6 +1,6 @@
 package com.coursework2.petshop;
 
-public class Pet implements Comparable {
+public class Pet implements Comparable<Pet> {
 	private String type;
 
 	public Pet(String type) {
@@ -20,10 +20,10 @@ public class Pet implements Comparable {
 		return "Pet type: " + type;
 	}
 
+
 	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(Pet o) {
+		return this.type.compareTo(o.getType());
 	}
 	
 	

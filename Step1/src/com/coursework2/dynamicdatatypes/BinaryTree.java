@@ -1,8 +1,11 @@
 package com.coursework2.dynamicdatatypes;
 
 public class BinaryTree {
+	/**Things to remember 
+	 *  1 Value versus reference
+	 */
 	private Node rootNode;
-	private Node pointerNode;
+	private Node pointerNode; // Do you need this? probably for Searahes.
 	
 	
 	public BinaryTree(Node rootNode) 
@@ -30,20 +33,23 @@ public class BinaryTree {
 	}
 	
 	
-	
-	public void compareNodes(Node a, Node b) 
+	/** Do you Really need this?
+	public int compareNodes(Node a, Node b) 
 	{
-		//TODO complete this!!
+		//TODO: really complete this
+		return 0;
 	}
+	*/
 	
 	public void traverseTree() 
 	{
 		//TODO complete this!!
 	}
 	
-	public void insertNode() 
+	public void insertNode(Node x) 
 	{
 		//TODO Complete this!
+		
 	}
 	
 	public void RemoveNode() 
