@@ -10,7 +10,16 @@ public class PetTest {
 		BinaryTree pets;
 		Node testnode = new Node(new Pet("Dog"));
 		pets = new BinaryTree(testnode);
+		testnode = new Node(new Pet("Cat"));
+		pets.insertNode(testnode);
 		System.out.println("Working");
+		
+		String input = "";
+		boolean close = true;
+	//	do
+	//	{
+			
+	//	}while(close);
 	
 
 	}

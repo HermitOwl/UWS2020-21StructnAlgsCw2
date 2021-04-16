@@ -48,7 +48,8 @@ public class BinaryTree {
 	
 	public void insertNode(Node x) 
 	{
-		//TODO Complete this!
+		this.rootNode.insert(x);
+		
 		
 	}
 	

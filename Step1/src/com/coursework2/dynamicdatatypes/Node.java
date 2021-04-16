@@ -67,8 +67,32 @@ public class Node {
 		 *   Else if (x.paylaod > this.payload)
 		 *   	if(BranchB== null)
 		 *   		BranchB = x;
-		 *   Else branchB.insert(x);
+		 *   	Else branchB.insert(x);
 		 */
+		
+		if(x.getPayload().compareTo(this.payload) < 0) 
+		{
+			if(this.branchA == null)
+			{
+				branchA = x;
+			}
+			else
+			{
+				branchA.insert(x);
+			}
+		}
+		else if (x.getPayload().compareTo(this.payload) < 0)
+		{
+			if(this.branchB == null)
+			{
+				branchB = x;
+			}
+			else
+			{
+				branchB.insert(x);
+			}
+		}
+		
 	}
 	
 	@Override
