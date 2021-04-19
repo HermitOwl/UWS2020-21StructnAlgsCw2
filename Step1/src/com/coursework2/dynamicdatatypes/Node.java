@@ -81,7 +81,7 @@ public class Node {
 				branchA.insert(x);
 			}
 		}
-		else if (x.getPayload().compareTo(this.payload) < 0)
+		else if (x.getPayload().compareTo(this.payload) > 0)
 		{
 			if(this.branchB == null)
 			{
@@ -98,7 +98,9 @@ public class Node {
 	@Override
 	public String toString() 
 	{
+		if(payload !=null)
 		return payload.toString();
+		else return "null";
 	}
 	
 	

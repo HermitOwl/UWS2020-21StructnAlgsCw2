@@ -23,9 +23,7 @@ public class BinaryTree {
 		pointerNode = rootNode;
 		quantity = 1; //one because it is initialised with a root node
 	}
-	
-	
-	
+		
 	public Node getRootNode() 
 	{
 		return rootNode;
@@ -42,10 +40,30 @@ public class BinaryTree {
 		this.pointerNode = pointerNode;
 	}
 	
-	protected void checkQuantity() //I don't want this test getting out unless absolutely necessary for testing, 
-	{//TODO: when possible (after testing) convert to  private
-		//TODO: Complete this
+	public static int checkQuantity(Node n) //simple method for finding the  size of a tree from a node 
+	{//TODO: Complete this
+		int quantity =0;
+		/**
+		 * What needs doing 
+		 * 1 count the root
+		 * 2 if !null count the left
+		 * 3 if !null count the right
+		 * 
+		 * 2 Count the left (assume the left is root)
+		 * 2.1 if !null count the left
+		 * 2.2 if !null count the right 
+		 * 
+		 * 3 Count the left (assume the left is root)
+		 * 2.1 if !null count the left
+		 * 2.2 if !null count the right 
+		 */
 		
+		if(n != null) {
+			quantity++;
+			quantity+= checkQuantity(n.getBranchA());
+			quantity+= checkQuantity(n.getBranchB());
+		}
+		return quantity;
 	}
 	
 	public int getQuantity() 
@@ -95,6 +113,20 @@ public class BinaryTree {
 		this.rootNode.insert(x);
 		
 		
+	}
+	
+	public void sortedInsertNode(Node x) 
+	{
+		//TODO Complete This
+		this.rootNode.insert(x);
+		
+		
+	}
+	
+	
+	public void sortTree()
+	{
+		//TODo Complete this
 	}
 	
 	public void RemoveNode() 
