@@ -5,13 +5,23 @@ public class BinaryTree {
 	 *  1 Value versus reference
 	 */
 	private Node rootNode;
-	private Node pointerNode; // Do you need this? probably for Searahes.
+	private Node pointerNode; // Do you need this? probably for Searches.
+	private int quantity; //temporary  measure?  I will need to count the quantity non-null elements.
+	
+	
+	public BinaryTree() 
+	{//In case I need it.
+		this.rootNode = null ;
+		pointerNode = null;
+		quantity = 0; 
+	}
 	
 	
 	public BinaryTree(Node rootNode) 
 	{
 		this.rootNode = rootNode ;
 		pointerNode = rootNode;
+		quantity = 1; //one because it is initialised with a root node
 	}
 	
 	
@@ -32,18 +42,52 @@ public class BinaryTree {
 		this.pointerNode = pointerNode;
 	}
 	
-	
-	/** Do you Really need this?
-	public int compareNodes(Node a, Node b) 
-	{
-		//TODO: really complete this
-		return 0;
+	protected void checkQuantity() //I don't want this test getting out unless absolutely necessary for testing, 
+	{//TODO: when possible (after testing) convert to  private
+		//TODO: Complete this
+		
 	}
-	*/
 	
-	public void traverseTree() 
+	public int getQuantity() 
 	{
+		return quantity; //TODO: Complete this
+	}
+	
+	public Object[] traverseTreeInorder() 
+	{
+		/**
+		 * 
+		 */
+		Object[] payloadList = new Object[quantity];
 		//TODO complete this!!
+		return payloadList;
+	}
+	public Object[] traverseTreePreOrder() 
+	{
+		/**
+		 * 
+		 */
+		Object[] payloadList = new Object[quantity];
+		//TODO complete this!!
+		return payloadList;
+	}
+	public Object[] traverseTreePostOrder() 
+	{
+		/**
+		 * 
+		 */
+		Object[] payloadList = new Object[quantity];
+		//TODO complete this!!
+		return payloadList;
+	}
+	public Object[] traverseTreeReverseOrder() 
+	{
+		/**
+		 * 
+		 */
+		Object[] payloadList = new Object[quantity];
+		//TODO complete this!!
+		return payloadList;
 	}
 	
 	public void insertNode(Node x) 
