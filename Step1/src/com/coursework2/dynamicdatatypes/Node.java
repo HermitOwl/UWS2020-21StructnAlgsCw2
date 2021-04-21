@@ -2,9 +2,16 @@ package com.coursework2.dynamicdatatypes;
 
 public class Node {
 	private Comparable payload;
+	//Why branchA and branchB?  because Left and right
 	private Node branchA;
 	private Node branchB;
 
+	public Node()
+	{
+		payload =null;
+		branchA = null;
+		branchB = null;
+	}
 	
 	
 	public Node(Comparable payload)
@@ -53,24 +60,24 @@ public class Node {
 	{
 		return branchB;
 	}
+	public boolean equals(Node x) 
+	{
+		return this.payload.compareTo(x.payload) ==0;
+	}
+	
+	public boolean greaterThan(Node x) 
+	{
+		return this.payload.compareTo(x.payload) > 0;
+	}
+	
+	public boolean lessThan(Node x) 
+	{
+		return this.payload.compareTo(x.payload) < 0;
+	}
 	
 	public void insert(Node x) 
 	{
-		//TODO: Complete this!! 
-		/**
-		 * Implement this at node level
-		 *  basic condition 
-		 *   if (x.payload < this.payload)
-		 *   	if (BranchA == null)
-		 *   		BranchA = x;
-		 *   	Else branchA.insert(x);
-		 *   Else if (x.paylaod > this.payload)
-		 *   	if(BranchB== null)
-		 *   		BranchB = x;
-		 *   	Else branchB.insert(x);
-		 */
-		
-		if(x.getPayload().compareTo(this.payload) < 0) 
+		if(this.greaterThan(x)) 
 		{
 			if(this.branchA == null)
 			{
@@ -81,7 +88,7 @@ public class Node {
 				branchA.insert(x);
 			}
 		}
-		else if (x.getPayload().compareTo(this.payload) > 0)
+		else if (this.lessThan(x))
 		{
 			if(this.branchB == null)
 			{
@@ -93,6 +100,33 @@ public class Node {
 			}
 		}
 		
+	}
+	
+	
+
+	
+	public boolean contains(Node x) 
+	{//TODO Create Comparison methods for payloads;
+		boolean temp = false;
+		if(this.equals(x)) 
+		{
+			temp = true;
+		}
+		else
+		{
+			if ((branchA != null) && (this.greaterThan(x)))
+			{
+				temp = branchA.contains(x); 
+			}
+			else if ((branchB != null) && (this.lessThan(x)))
+			{
+				temp = branchB.contains(x); 
+			}
+		}
+			
+		
+
+	return temp;
 	}
 	
 	@Override

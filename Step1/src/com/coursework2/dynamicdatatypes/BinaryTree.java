@@ -6,7 +6,7 @@ public class BinaryTree {
 	 */
 	private Node rootNode;
 	private Node pointerNode; // Do you need this? probably for Searches.
-	private int quantity; //temporary  measure?  I will need to count the quantity non-null elements.
+	private int quantity; 
 	
 	
 	public BinaryTree() 
@@ -40,24 +40,9 @@ public class BinaryTree {
 		this.pointerNode = pointerNode;
 	}
 	
-	public static int checkQuantity(Node n) //simple method for finding the  size of a tree from a node 
-	{//TODO: Complete this
+	public static int checkQuantity(Node n) 
+	{//TODO: Is this complete?
 		int quantity =0;
-		/**
-		 * What needs doing 
-		 * 1 count the root
-		 * 2 if !null count the left
-		 * 3 if !null count the right
-		 * 
-		 * 2 Count the left (assume the left is root)
-		 * 2.1 if !null count the left
-		 * 2.2 if !null count the right 
-		 * 
-		 * 3 Count the left (assume the left is root)
-		 * 2.1 if !null count the left
-		 * 2.2 if !null count the right 
-		 */
-		
 		if(n != null) {
 			quantity++;
 			quantity+= checkQuantity(n.getBranchA());
@@ -80,53 +65,44 @@ public class BinaryTree {
 		//TODO complete this!!
 		return payloadList;
 	}
+	/**
+	 // probably won't need them
 	public Object[] traverseTreePreOrder() 
 	{
-		/**
-		 * 
-		 */
+		
 		Object[] payloadList = new Object[quantity];
 		//TODO complete this!!
 		return payloadList;
 	}
 	public Object[] traverseTreePostOrder() 
 	{
-		/**
-		 * 
-		 */
+		
 		Object[] payloadList = new Object[quantity];
 		//TODO complete this!!
 		return payloadList;
 	}
 	public Object[] traverseTreeReverseOrder() 
 	{
-		/**
-		 * 
-		 */
+		
 		Object[] payloadList = new Object[quantity];
 		//TODO complete this!!
 		return payloadList;
 	}
-	
+	*/
+
 	public void insertNode(Node x) 
 	{
 		this.rootNode.insert(x);
-		
-		
-	}
-	
-	public void sortedInsertNode(Node x) 
-	{
-		//TODO Complete This
-		this.rootNode.insert(x);
+		quantity = checkQuantity(rootNode);
 		
 		
 	}
 	
 	
-	public void sortTree()
+	
+	public boolean contains(Node x) 
 	{
-		//TODo Complete this
+		return rootNode.contains(x);
 	}
 	
 	public void RemoveNode() 
