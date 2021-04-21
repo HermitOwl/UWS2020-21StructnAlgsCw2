@@ -5,110 +5,181 @@ public class BinaryTree {
 	 *  1 Value versus reference
 	 */
 	private Node rootNode;
-	private Node pointerNode; // Do you need this? probably for Searches.
-	private int quantity; 
+	private BinaryTree low;
+	private BinaryTree high;
+	private int quantity;
 	
 	
-	public BinaryTree() 
-	{//In case I need it.
-		this.rootNode = null ;
-		pointerNode = null;
-		quantity = 0; 
+	public BinaryTree() {
+		rootNode=  new Node();
+		low = null;
+		high = null;
+		quantity = 0;
 	}
 	
-	
-	public BinaryTree(Node rootNode) 
-	{
-		this.rootNode = rootNode ;
-		pointerNode = rootNode;
-		quantity = 1; //one because it is initialised with a root node
+	public BinaryTree(Node rootNode) {
+		this.rootNode=  rootNode;
+		low = null;
+		high = null;
+		quantity = 1;
 	}
-		
-	public Node getRootNode() 
+	
+	//Getter Methods
+	
+	public Node getRoot() 
 	{
 		return rootNode;
 	}
 	
-	public Node getPointerNode() 
+	public BinaryTree getLow() 
 	{
-		return pointerNode;
+		return low;
 	}
 	
-	public void setPointerNode(Node pointerNode)
+	
+	public Node getLowNode() 
 	{
-		
-		this.pointerNode = pointerNode;
+		return low.getRoot();
 	}
 	
-	public static int checkQuantity(Node n) 
-	{//TODO: Is this complete?
-		int quantity =0;
-		if(n != null) {
-			quantity++;
-			quantity+= checkQuantity(n.getBranchA());
-			quantity+= checkQuantity(n.getBranchB());
-		}
-		return quantity;
+	public BinaryTree getHigh() 
+	{
+		return high;
 	}
+	
+	public Node getHighNode() 
+	{
+		return high.getRoot();
+	}
+	
 	
 	public int getQuantity() 
 	{
-		return quantity; //TODO: Complete this
+		return checkQuantity(this);//inefficient ;
 	}
 	
-	public Object[] traverseTreeInorder() 
-	{
-		/**
-		 * 
-		 */
-		Object[] payloadList = new Object[quantity];
-		//TODO complete this!!
-		return payloadList;
-	}
+	//Setter Methods
 	/**
-	 // probably won't need them
-	public Object[] traverseTreePreOrder() 
+	public void setRoot(Node rootNode) 
 	{
-		
-		Object[] payloadList = new Object[quantity];
-		//TODO complete this!!
-		return payloadList;
+		this.rootNode = rootNode;
 	}
-	public Object[] traverseTreePostOrder() 
+	
+
+	public void setLow(BinaryTree low) 
 	{
-		
-		Object[] payloadList = new Object[quantity];
-		//TODO complete this!!
-		return payloadList;
+		this.low = low;
 	}
-	public Object[] traverseTreeReverseOrder() 
+	
+	public void setLowNode(Node lowNode) 
 	{
-		
-		Object[] payloadList = new Object[quantity];
-		//TODO complete this!!
-		return payloadList;
+		low.setRoot(lowNode);
+	}
+	
+	public void setHigh(BinaryTree high) 
+	{
+		this.high = high;
+	}
+	
+	public void setHighNode(Node highNode) 
+	{
+		high.setRoot(highNode);
 	}
 	*/
+	
+	public void detachLowBranch() 
+	{
+		low = new BinaryTree();
+	}
+	
+	public void detachHighBranch() 
+	{
+		high = new BinaryTree();
+	}
+	
+	
+	public void add(Node e) 
+	{
+		if((rootNode.isEmpty()) || (rootNode ==  null))
+		{
+			rootNode = e;
+		}
+		else if(rootNode.greaterThan(e)) 
+		{
+			if(low == null)
+				low = new BinaryTree();
+			low.add(e);
+		}
+		else if(rootNode.lessThan(e)) 
+		{
+			if(high == null)
+				high = new BinaryTree();
+			high.add(e);
+		}
+		
 
-	public void insertNode(Node x) 
-	{
-		this.rootNode.insert(x);
-		quantity = checkQuantity(rootNode);
-		
 		
 	}
 	
 	
 	
-	public boolean contains(Node x) 
+	
+	public static int checkQuantity(BinaryTree t) 
 	{
-		return rootNode.contains(x);
+		int temp = 0;
+		if((t != null) && !t.getRoot().isEmpty()) {//if the node is empty, assume the rest of the tree is empty
+			temp++;
+			temp+=checkQuantity(t.getLow());
+			temp+=checkQuantity(t.getHigh());
+		}
+		return temp;
+	}
+	public boolean contains(Node e) 
+	{
+		/**
+		 * boolean temp = false;
+		if(this.equals(x)) 
+		{
+			temp = true;
+		}
+		else
+		{
+			if ((branchA != null) && (this.greaterThan(x)))
+			{
+				temp = branchA.contains(x); 
+			}
+			else if ((branchB != null) && (this.lessThan(x)))
+			{
+				temp = branchB.contains(x); 
+			}
+		 */
+		boolean temp= false;
+		if((e !=  null) && !e.isEmpty())//if it's empty or null it will trigger true incorrectly
+		{
+			if((rootNode != null) && !rootNode.isEmpty()) //if the root is null or empty, assume the tree is empty
+			{
+				if(rootNode.equals(e))
+					temp = true;
+				else if(rootNode.greaterThan(e))
+					if(low != null)
+					temp = low.contains(e);
+				else 
+					if(high != null)
+					temp = high.contains(e);
+			}
+		}
+		
+		
+		
+		return temp;
 	}
 	
-	public void RemoveNode() 
+	public Comparable[] toArray()
 	{
-		//TODO Complete this!
+		//TODO: Complete to Array, use in order Traversal
+		return null;
 	}
+	
 	
 	
 	

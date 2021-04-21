@@ -18,55 +18,46 @@ public class PetTest {
 	
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		BinaryTree pets;
-		Node testnode = new Node(new Pet("C"));
-		pets = new BinaryTree(testnode);
-		testnode = new Node(new Pet("B"));
-		pets.insertNode(testnode);
-
-		testnode = new Node(new Pet("E"));
-		pets.insertNode(testnode);
-		testnode = new Node(new Pet("A"));
-		pets.insertNode(testnode);
-		testnode = new Node(new Pet("F"));
-		pets.insertNode(testnode);
-		testnode = new Node(new Pet("D"));
-		pets.insertNode(testnode);
 		
-		System.out.println("Working");
-		
-		String input = "";
-		boolean close = true;
-		System.out.println("Testing");
-		System.out.println("Root: "+pets.getRootNode().toString());
-		System.out.println("Root-Left: "+pets.getRootNode().getBranchA().toString());
-		System.out.println("Root-Left-Left: "+pets.getRootNode().getBranchA().getBranchA().toString());
-		System.out.println("Root-Right: "+pets.getRootNode().getBranchB().toString());
-		System.out.println("Root-Right-Left: "+pets.getRootNode().getBranchB().getBranchA().toString());
-	//	System.out.println("Root Left:"+pets.getRootNode().getBranchA().getBranchB().toString()); //This is null, haven't added try catches for null yet
-		System.out.println("Root-Right-Right: "+pets.getRootNode().getBranchB().getBranchB().toString());
-		System.out.println("Test node quantity: "+BinaryTree.checkQuantity(pets.getRootNode()));
-		System.out.println();
-		System.out.println("Comparison Tests");
-		//Equal Test because for some reason Node.Equals doesn't work yet
-		System.out.println("compareTo Test P == P: " + (new Pet("P").compareTo(new Pet("P")) == 0));
-		System.out.println("Equals Test P == P: " + (new Pet("P").equals(new Pet("P")))); // Compare to Works Equals doesn't
-		System.out.println("Comparable.compareTo Test  P == D: " + (new Pet("P").compareTo(new Pet("D")) == 0));
-		System.out.println("Comparable.compareTo Test  D (in pets) == D: " + (pets.getRootNode().getBranchB().getBranchA().getPayload().compareTo(new Pet("D")) == 0));
-		System.out.println("Comparable.compareTo Test  D (in pets) == P: " + (pets.getRootNode().getBranchB().getBranchA().getPayload().compareTo(new Pet("P")) == 0));
-		System.out.println();
-		System.out.println();
-		System.out.println("Node.equals Test  D (in pets) == D: " + (pets.getRootNode().getBranchB().getBranchA().equals(new Node( new Pet("D")))));
-		System.out.println("Node.equals Test  D (in pets) == P: " + (pets.getRootNode().getBranchB().getBranchA().equals(new Node( new Pet("P")))));
-		System.out.println();
-		System.out.println("Comparison Tests");
-		Node D = new Node(new Pet("D"));
-		System.out.println("Contains D: "+ pets.contains(D));
-		System.out.println("Contains P: "+ pets.contains(new Node(new Pet("P"))));
-		//System.out.println("Contains \"D\""+ pets.contains(new Node()));// Returns null
+		System.out.println("#Testing#");
+		System.out.println("##New tree##");
+		BinaryTree petTree = new BinaryTree();
+		System.out.println("\tTree initialised:  " +petTree.getRoot().toString()); 
+		System.out.println("");
+		System.out.println("##New tree (include Pet type 'D')##");
+		Pet pet = new Pet("D");
+		petTree = new BinaryTree(new Node(pet));
+		System.out.println("\tTree initialised:  " +petTree.getRoot().toString()); 
 	
+		System.out.println("");
+		System.out.println("##Same Tree (Add Pet type 'A')##");
+		pet = new Pet("A");
+		petTree.add(new Node(pet));;
+		System.out.println("\tTree initialised:  " +petTree.getRoot().toString()); 
+		System.out.println("\t\t low:  " +petTree.getLowNode().toString()); 
 
+		pet = new Pet("E");
+		petTree.add(new Node(pet));;
+		System.out.println("\t\t high:  " +petTree.getHighNode().toString()); 
+		
+		pet = new Pet("D");
+		petTree.add(new Node(pet));;
+		System.out.println("\t where new node= root:  " +petTree.getRoot().toString());
+		System.out.println("\t petTree quanity:  " +petTree.getQuantity());
+		
+		System.out.println("");
+		System.out.println("##New Tree (adding list of nodes to tree')##");
+		petTree = new BinaryTree();
+		Node[] pets = {new Node(new Pet("B")),new Node(new Pet("D")),new Node( new Pet("C")), new Node(new Pet("A")), new Node(new Pet("F")), new Node(new Pet("E")), new Node(new Pet("G")), new Node(new Pet("J")), new Node(new Pet("H")), new Node(new Pet("I"))};
+	
+		for(int i =0 ; i < pets.length; i++) 
+		{
+			petTree.add(pets[i]);
+		}
+		System.out.println("Does petTree Contain: A "+petTree.contains(new Node(new Pet("A"))));
+		System.out.println("Does petTree Contain: F "+petTree.contains(new Node(new Pet("F")))); // Why? Will need to add inorder traversal.
+		System.out.println("Does petTree Contain: P "+petTree.contains(new Node(new Pet("P"))));
+		
 	}
 
 }
