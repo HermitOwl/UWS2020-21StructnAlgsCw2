@@ -5,8 +5,7 @@ public class Node {
 	
 	public Node()
 	{
-		payload =null;
-		
+		payload = null;
 	}
 	
 	
@@ -32,17 +31,17 @@ public class Node {
 	}
 	public boolean equals(Node x) 
 	{
-		return this.payload.compareTo(x.payload) ==0;
+		return this.payload.compareTo(x.getPayload()) == 0;
 	}
 	
 	public boolean greaterThan(Node x) 
 	{
-		return this.payload.compareTo(x.payload) > 0;
+		return this.payload.compareTo(x.getPayload()) > 0;
 	}
 	
 	public boolean lessThan(Node x) 
 	{
-		return this.payload.compareTo(x.payload) < 0;
+		return this.payload.compareTo(x.getPayload()) < 0;
 	}
 	
 	
