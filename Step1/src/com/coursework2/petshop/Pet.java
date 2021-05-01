@@ -2,6 +2,7 @@ package com.coursework2.petshop;
 
 public class Pet implements Comparable<Pet> {
 	//TODO:  Complete all comments 
+	//TODO: Add Product Array;
 	private String type;
 
 	public Pet(String type) {
@@ -17,6 +18,12 @@ public class Pet implements Comparable<Pet> {
 	}
 	
 	public String toString() 
+	{
+		return "Pet type: " + type;
+	}
+	
+	
+	public String toDetailedString() 
 	{
 		return "Pet type: " + type;
 	}
