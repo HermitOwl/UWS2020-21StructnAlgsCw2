@@ -1,7 +1,11 @@
 package com.coursework2.petshop;
 
-public class Product {
-
+/**
+ * @author James Agbotta
+ *
+ */
+public class Product implements Comparable<Product> {
+	// TODO - Add comments to all elements
 	private String productID;
 	private String productName;
 	private int stockQuantity;
@@ -46,5 +50,18 @@ public class Product {
 	@Override
 	public String toString() {
 		return "" + productID + ": \t " + productName + "\n -> stockQuantity " + stockQuantity;
+	}
+
+	@Override
+	public int compareTo(Product o) {
+		return compareID(o) + compareName(o);
+	}
+
+	public int compareID(Product o) {
+		return productID.compareTo(o.getID());
+	}
+
+	public int compareName(Product o) {
+		return productName.compareTo(o.productName);
 	}
 }

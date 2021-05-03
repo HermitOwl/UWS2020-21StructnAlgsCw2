@@ -1,5 +1,12 @@
 package com.coursework2.dynamicdatatypes;
 
+/**
+ * public class Node
+ * 
+ * 
+ * @author James Agbotta
+ *
+ */
 public class Node {
 	//TODO:  Complete all comments 
 	
