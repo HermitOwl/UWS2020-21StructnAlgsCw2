@@ -108,24 +108,6 @@ public class BinaryTree {
 	 * public void setHighNode(Node highNode) { high.setRoot(highNode); }
 	 */
 
-	public void detachLowBranch() {
-		low = new BinaryTree();
-	}
-
-	public void detachHighBranch() {
-		high = new BinaryTree();
-	}
-	
-	
-	public void attachLowBranch(BinaryTree branch) 
-	{
-		//TODO: Complete This!
-	} 
-	
-	public void attachHighBranch(BinaryTree branch) 
-	{
-		//TODO: Complete This!
-	} 
 
 	public void add(Node e) {
 		// if the node is null then there's no point
@@ -162,7 +144,42 @@ public class BinaryTree {
 
 	}
 
-	public static int checkQuantity(BinaryTree t) {
+	public void addTree(BinaryTree t) 
+	{
+		if ((t != null) && !t.getRoot().isEmpty()) 
+		{
+			if ((rootNode != null) && !rootNode.isEmpty()) {
+			{
+				if(rootNode.greaterThan(t.getRoot())) 
+				{
+					if(low != null) 
+					{
+						if(low.getRoot().isEmpty()) 
+						{
+						low = t;	
+						}
+						else 
+							low.addTree(t);
+					}
+				}
+				else if(rootNode.lessThan(t.getRoot())) 
+				{
+					if(high != null) 
+					{
+						if(high.getRoot().isEmpty()) 
+						{
+						high = t;	
+						}
+						else 
+							high.addTree(t);
+					}
+				}
+				}
+			}
+		}
+	}
+	
+public static int checkQuantity(BinaryTree t) {
 		int temp = 0;
 		if ((t != null) && !t.getRoot().isEmpty()) {// if the node is empty, assume the rest of the tree is empty
 			temp++;
@@ -192,6 +209,30 @@ public class BinaryTree {
 
 		return temp;
 	}
+	
+	public BinaryTree getTreeViaSearch(Node e) 
+	{
+		BinaryTree tempTree = new BinaryTree();
+		
+		if ((e != null) && !e.isEmpty())// if it's empty or null it will trigger true incorrectly
+		{
+			if ((rootNode != null) && !rootNode.isEmpty()) // if the root is null or empty, assume the tree is empty
+			{
+				if (rootNode.equals(e))
+					tempTree = this;
+				else if (rootNode.greaterThan(e)) {
+					if (low != null)
+						tempTree = low.getTreeViaSearch(e);
+				} else if (rootNode.lessThan(e)) {
+					if (high != null)
+						tempTree = high.getTreeViaSearch(e);
+				}
+			}
+		}
+		
+		
+		return tempTree;
+	}
 
 	public static String stringUp(BinaryTree t) {
 		//TODO Decide whether this will be to string  or something else
@@ -210,8 +251,55 @@ public class BinaryTree {
 	{
 	//TODO Complete this!!!
 		Node removed = new Node();
+		BinaryTree tempTree = new BinaryTree();
+		/*
+		 * To remove:
+		 * 1 - Find the Node in the tree
+		 * 2 - generate new SubTree from  current SubTree
+		 * 3 - replace current SubTree 
+		 */
+		
+			tempTree = this.getTreeViaSearch(e);//Find the Node, If it's not there it will return a blank tree
+			removed =tempTree.getRoot();
+			this.replaceNode(e, reduceTree(tempTree));
+			
+			// Now generate new tree 
+
 		return removed;
 	}
+	
+	private BinaryTree reduceTree(BinaryTree t) 
+	{
+		BinaryTree temp = t.getHigh();
+		temp.addTree(t.getLow());
+		return temp;
+	}
+	
+	private void replaceNode(Node e, BinaryTree replacement)
+	{
+		if ((e != null) && !e.isEmpty())// if it's empty or null it will trigger true incorrectly
+		{
+			if ((rootNode != null) && !rootNode.isEmpty()) 
+			{
+				if (rootNode.equals(e)) {
+				 this.high = replacement.getHigh();
+				 this.low = replacement.getLow();
+				 this.rootNode = replacement.getRoot();
+				}
+				else if (rootNode.greaterThan(e)) {
+					if (low != null)
+						low.replaceNode(e, replacement);
+				} else if (rootNode.lessThan(e)) {
+					if (high != null)
+						high.replaceNode(e, replacement);
+				}
+			}
+			
+		}
+		
+	}
+	
+	
 
 
 
