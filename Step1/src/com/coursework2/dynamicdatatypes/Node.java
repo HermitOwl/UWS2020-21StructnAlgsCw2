@@ -1,8 +1,7 @@
 package com.coursework2.dynamicdatatypes;
 
 
-/**public class Node
- * 
+/**
  * This class serves as a carrier class for Comparable implemented objects, in use with Dynamic Data Structures.
  * The Comparable object (payload) is wrapped to protect from unintended alteration.
  * @author James Agbotta

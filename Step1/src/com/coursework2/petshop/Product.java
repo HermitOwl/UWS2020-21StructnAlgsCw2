@@ -5,31 +5,47 @@ package com.coursework2.petshop;
  *
  */
 public class Product implements Comparable<Product> {
-	// TODO - Add comments to all elements
 	private String productID;
 	private String productName;
 	private int stockQuantity;
 
+	/**
+	 * 
+	 */
 	public Product() {
 		productID = "";
 		productName = "";
 		stockQuantity = 0;
 	}
 
+	/**
+	 * @param productID
+	 * @param productName
+	 * @param stockQuantity
+	 */
 	public Product(String productID, String productName, int stockQuantity) {
 		this.productID = productID;
 		this.productName = productName;
 		this.stockQuantity = stockQuantity;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getID() {
 		return productID;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getName() {
 		return productID;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getQuantity() {
 		return stockQuantity;
 	}

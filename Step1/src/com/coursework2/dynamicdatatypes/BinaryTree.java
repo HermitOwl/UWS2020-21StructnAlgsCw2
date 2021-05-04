@@ -124,46 +124,47 @@ public class BinaryTree {
 	 * @param Node e - the node to be added;
 	 */
 
-	public void add(Node e) {
+	public void add(Node node) {
 		// if the node is null then there's no point
-		if ((e != null) && !e.isEmpty()) {
+		if ((node != null) && !node.isEmpty()) {
 
 			if ((rootNode != null) && !rootNode.isEmpty()) {
-				if (rootNode.greaterThan(e)) {
+				if (rootNode.greaterThan(node)) {
 					if (low != null) {
 						if (low.getRoot().isEmpty())
-							low = new BinaryTree(e);
+							low = new BinaryTree(node);
 						else
-							low.add(e);
+							low.add(node);
 					} else {
-						low = new BinaryTree(e);
+						low = new BinaryTree(node);
 					}
-				} else if (rootNode.lessThan(e)) {
+				} else if (rootNode.lessThan(node)) {
 					if (high != null) {
 						if (high.getRoot().isEmpty()) {
-							high = new BinaryTree(e);
+							high = new BinaryTree(node);
 						} else
-							high.add(e);
+							high.add(node);
 					} else {
-						high = new BinaryTree(e);
+						high = new BinaryTree(node);
 					}
 
 				}
 			} else {
 
-				rootNode = e;
+				rootNode = node;
 			}
 
 		}
 
 	}
 
-	/**
-	 * 
+	/**This adds a subtree to the tree. 
+	 * Assuming the subtree is already in order, the said subtree will be placed in the next available empty branch according to the magnitude of the root node's payload. 
+	 *
 	 * @param BinaryTree t
 	 */
-
 	public void addTree(BinaryTree t) {
+		try {
 		if ((t != null) && !t.getRoot().isEmpty()) {
 			if ((rootNode != null) && !rootNode.isEmpty()) {
 				{
@@ -184,6 +185,10 @@ public class BinaryTree {
 					}
 				}
 			}
+		}
+		}catch (java.lang.ClassCastException e) 
+		{
+			System.out.println("Failed to add Tree, object missmatch");
 		}
 	}
 
@@ -259,22 +264,22 @@ public class BinaryTree {
 	 * public void findandReplace(Node e) This method is a patch to fix an issue I
 	 * wouldn't have if only I used Current and Parent Nodes
 	 * 
-	 * @param e
+	 * @param replacementNode
 	 * @return
 	 */
-	public void findAndReplace(Node e) {
-		if ((e != null) && !e.isEmpty())// if it's empty or null it will trigger true incorrectly
+	public void findAndReplace(Node replacementNode) {
+		if ((replacementNode != null) && !replacementNode.isEmpty())// if it's empty or null it will trigger true incorrectly
 		{
 			if ((rootNode != null) && !rootNode.isEmpty()) // if the root is null or empty, assume the tree is empty
 			{
-				if (rootNode.equals(e))
-					rootNode = e;
-				else if (rootNode.greaterThan(e)) {
+				if (rootNode.equals(replacementNode))
+					rootNode = replacementNode;
+				else if (rootNode.greaterThan(replacementNode)) {
 					if (low != null)
-						low.findAndReplace(e);
-				} else if (rootNode.lessThan(e)) {
+						low.findAndReplace(replacementNode);
+				} else if (rootNode.lessThan(replacementNode)) {
 					if (high != null)
-						high.findAndReplace(e);
+						high.findAndReplace(replacementNode);
 				}
 			}
 		}
@@ -283,25 +288,25 @@ public class BinaryTree {
 
 	/**
 	 * 
-	 * @param e
+	 * @param searchNode
 	 * @return
 	 */
 
-	public BinaryTree getTreeViaSearch(Node e) {
+	public BinaryTree getTreeViaSearch(Node searchNode) {
 		BinaryTree tempTree = new BinaryTree();
 
-		if ((e != null) && !e.isEmpty())// if it's empty or null it will trigger true incorrectly
+		if ((searchNode != null) && !searchNode.isEmpty())// if it's empty or null it will trigger true incorrectly
 		{
 			if ((rootNode != null) && !rootNode.isEmpty()) // if the root is null or empty, assume the tree is empty
 			{
-				if (rootNode.equals(e))
+				if (rootNode.equals(searchNode))
 					tempTree = this;
-				else if (rootNode.greaterThan(e)) {
+				else if (rootNode.greaterThan(searchNode)) {
 					if (low != null)
-						tempTree = low.getTreeViaSearch(e);
-				} else if (rootNode.lessThan(e)) {
+						tempTree = low.getTreeViaSearch(searchNode);
+				} else if (rootNode.lessThan(searchNode)) {
 					if (high != null)
-						tempTree = high.getTreeViaSearch(e);
+						tempTree = high.getTreeViaSearch(searchNode);
 				}
 			}
 		}
@@ -311,54 +316,54 @@ public class BinaryTree {
 
 	/**
 	 * 
-	 * @param e
+	 * @param searchNode
 	 * @return
 	 */
-	public Node remove(Node e) {
+	public Node remove(Node searchNode) {
 		Node removed = new Node();
 		BinaryTree tempTree = new BinaryTree();
 
-		tempTree = this.getTreeViaSearch(e);// Find the Node, If it's not there it will return a blank tree
+		tempTree = this.getTreeViaSearch(searchNode);// Find the Node, If it's not there it will return a blank tree
 		removed = tempTree.getRoot(); // set the Node to be returned
-		this.replaceNode(e, reduceTree(tempTree)); // Replace the current subtree with one where the node is removed
+		this.replaceNode(searchNode, reduceTree(tempTree)); // Replace the current subtree with one where the node is removed
 
 		return removed;
 	}
 
 	/**
 	 * 
-	 * @param BinaryTree t
+	 * @param subtree
 	 * @return
 	 */
-	private BinaryTree reduceTree(BinaryTree t) {
+	private BinaryTree reduceTree(BinaryTree subtree) {
 
 		BinaryTree temp = new BinaryTree();
-		if (t.getHigh() != null)
-			temp = t.getHigh();
-		if (t.getLow() != null)
-			temp.addTree(t.getLow());
+		if (subtree.getHigh() != null)
+			temp = subtree.getHigh();
+		if (subtree.getLow() != null)
+			temp.addTree(subtree.getLow());
 		return temp;
 	}
 
 	/**
 	 * 
-	 * @param e
+	 * @param searchNode
 	 * @param replacement
 	 */
-	private void replaceNode(Node e, BinaryTree replacement) {
-		if ((e != null) && !e.isEmpty())// if it's empty or null it will trigger true incorrectly
+	private void replaceNode(Node searchNode, BinaryTree replacement) {
+		if ((searchNode != null) && !searchNode.isEmpty())// if it's empty or null it will trigger true incorrectly
 		{
 			if ((rootNode != null) && !rootNode.isEmpty()) {
-				if (rootNode.equals(e)) {
+				if (rootNode.equals(searchNode)) {
 					this.high = replacement.getHigh();
 					this.low = replacement.getLow();
 					this.rootNode = replacement.getRoot();
-				} else if (rootNode.greaterThan(e)) {
+				} else if (rootNode.greaterThan(searchNode)) {
 					if (low != null)
-						low.replaceNode(e, replacement);
-				} else if (rootNode.lessThan(e)) {
+						low.replaceNode(searchNode, replacement);
+				} else if (rootNode.lessThan(searchNode)) {
 					if (high != null)
-						high.replaceNode(e, replacement);
+						high.replaceNode(searchNode, replacement);
 				}
 			}
 
@@ -366,25 +371,24 @@ public class BinaryTree {
 
 	}
 
-	/**
+	/**This method uses an inorder traversal to list all the Node objects in the tree. 
 	 * 
-	 * @param t
-	 * @return
+	 * @param subtree
+	 * @return String
 	 */
-	public static String stringUp(BinaryTree t) {
+	public static String stringUp(BinaryTree subtree) {
 		String temp = "";
-		if ((t != null) && !t.getRoot().isEmpty()) {// if the node is empty, assume the rest of the tree is empty
+		if ((subtree != null) && !subtree.getRoot().isEmpty()) {// if the node is empty, assume the rest of the tree is empty
 
-			temp = temp + stringUp(t.getLow()) + "\n";
-			temp = temp + t.getRoot().toString();
-			temp = temp + stringUp(t.getHigh());
+			temp = temp + stringUp(subtree.getLow()) + "\n";
+			temp = temp + subtree.getRoot().toString();
+			temp = temp + stringUp(subtree.getHigh());
 		}
 		return temp;
 	}
 
-	/**
+	/**This method applies the static StringUp() method directly to the tree itself rather than any unrelated tree or subtree.
 	 * 
-	 * @param t
 	 * @return
 	 */
 	public String stringUp() {

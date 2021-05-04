@@ -4,7 +4,7 @@ import com.coursework2.dynamicdatatypes.*;
 
 
 /**
- * public class 
+ * This class is the main class of the project. Handles the console user interface, client side
  * @author James Agbotta
  *
  */
@@ -12,7 +12,7 @@ public class PetTest {
 	// TODO: Complete all comments
 
 	/**
-	 * public static boolean confirmed() This method takes in input from the user
+	 * This method takes in input from the user
 	 * and tests if the value results in a 'y' as the first character. This method
 	 * is used for confirming user choices.
 	 *
@@ -34,6 +34,12 @@ public class PetTest {
 		return (tempChar == 'y');
 	}
 
+	/**This method takes in a user's response to a string query, and then verifies said input with confirmation
+	 * @param query
+	 * @return String textchoice.strip(); this method returns the string input from the user, stripped of leading and trailing spaces. 
+	 * 
+	 * 
+	 */
 	public static String stringInputConfirm(String query) {
 		String textChoice;
 		do {
@@ -43,6 +49,10 @@ public class PetTest {
 		return textChoice.strip();
 	}
 
+	/**This method takes in a user's response to a string query, and then verifies said input with confirmation and returns the parsed integer result
+	 * @param query
+	 * @return int choice
+	 */
 	public static int integerInputConfirm(String query) {
 		int choice = 0;
 		do {
@@ -81,6 +91,7 @@ public class PetTest {
 					+ "0: Exit [Warning! Doing so will clear the system]");
 			System.out.println("******************************\n");
 
+			//input.getInteger does not handle java.lang.NumberFormatException  in implementation. Hence, it will be handled here 
 			try {
 				menuChoice = Input.getInteger("Your choice ->");
 			} catch (java.lang.NumberFormatException e) {
@@ -161,18 +172,20 @@ public class PetTest {
 							}
 
 							switch (menuChoice) {
+							/* */
 
 							case 0:
 								System.out.print("Do you wish to Quit?\ny/n>");
 								close = confirmed();
 								break;
-
+								/* */
 							case 1:
 
 								System.out.println(
 										"Details on: " + tempPet.getType() + "\n" + tempPet.toDetailedString());
 								System.out.println("\n");
 								break;
+								/* */
 							case 2:
 								do {
 
@@ -185,6 +198,7 @@ public class PetTest {
 								tempNode = new Node(tempPet);
 								test.findAndReplace(tempNode);
 								break;
+								/* */
 							case 3:
 								int index;
 								do {
@@ -204,6 +218,7 @@ public class PetTest {
 								tempNode = new Node(tempPet);
 								test.findAndReplace(tempNode);
 								break;
+								/* */
 							case 4:
 
 								tempPet = new Pet(
