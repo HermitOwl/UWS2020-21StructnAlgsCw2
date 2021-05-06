@@ -7,7 +7,6 @@ import java.util.ArrayList;
  *
  */
 public class Pet implements Comparable<Pet> {
-	// TODO: Complete all comments
 	private String type;
 	private ArrayList<Product> products;
 
