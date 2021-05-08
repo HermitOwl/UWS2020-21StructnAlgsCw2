@@ -2,20 +2,22 @@ package com.coursework2.petshop;
 
 import java.util.ArrayList;
 
+import com.coursework2.dynamicdatatypes.LinkedList;
+
 /**
  * @author James Agbotta
  *
  */
 public class Pet implements Comparable<Pet> {
 	private String type;
-	private ArrayList<Product> products;
+	private LinkedList products;
 
 	/**
 	 * @param type
 	 */
 	public Pet(String type) {
 		this.type = type;
-		products = new ArrayList<Product>();
+		products = new LinkedList();
 	}
 
 	/**
@@ -44,7 +46,7 @@ public class Pet implements Comparable<Pet> {
 	 * @return
 	 */
 	public Product getProduct(int index) {
-		return products.get(index);
+		return (Product) products.get(index);
 	}
 
 	/**
@@ -54,7 +56,7 @@ public class Pet implements Comparable<Pet> {
 
 		Product[] temp = new Product[products.size()];
 		for (int i = 0; i < products.size(); i++) {
-			temp[i] = products.get(i);
+			temp[i] = (Product)products.get(i);
 		}
 		return temp;
 	}
@@ -64,7 +66,7 @@ public class Pet implements Comparable<Pet> {
 	 * @return
 	 */
 	public Product removeProduct(int index) {
-		return products.remove(index);
+		return (Product)products.remove(index);
 	}
 
 	/**
@@ -88,9 +90,9 @@ public class Pet implements Comparable<Pet> {
 	public String toDetailedString() {
 		String temp = "Pet type: " + type + "\n Products available:\n";
 
-		for (Product p : products) {
-			temp = temp + p.toString() + "\n";
-		}
+		for(int i = 0; i > products.size(); i++)
+			temp = temp + products.get(i).toString() + "\n";
+		
 		return temp;
 
 	}

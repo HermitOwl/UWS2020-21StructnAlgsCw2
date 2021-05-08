@@ -12,7 +12,7 @@ class LinkedListTest {
 	void initTest() {
 		
 		 testlist2= new LinkedList(5);
-		assert((int)testlist2.getCurrent() ==5); //cast int because Comparable isn't type set
+		assert((int)testlist2.getHead() ==5); //cast int because Comparable isn't type set
 		assertNotNull(testlist);
 		
 		
@@ -24,16 +24,16 @@ class LinkedListTest {
 		testlist2= new LinkedList(5);
 		testlist.add(1);
 		assertEquals(1, (int)testlist.getHead());
-		assertEquals(1, testlist.getLength());
+		assertEquals(1, testlist.size());
 		testlist.add(1);
-		assertEquals(1, testlist.getLength());//initial error, length not incrimented ,
+		assertEquals(1, testlist.size());//initial error, length not incrimented ,
 //		next error (duplicating entries)
 		
 		
 		testlist2.add(2);
 		testlist2.add(1);
 		//Test if the literal count matches the 
-		assertEquals(LinkedList.checkLength(testlist2),testlist2.getLength());
+		assertEquals(LinkedList.checkLength(testlist2),testlist2.size());
 	    
 	}
 	@Test 
@@ -59,8 +59,8 @@ class LinkedListTest {
 		
 		
 		assertEquals(arrayTest.length,LinkedList.checkLength(testlist));
-		assertEquals(arrayTest.length,testlist.getLength());
-		listTest = new int[testlist.getLength()];
+		assertEquals(arrayTest.length,testlist.size());
+		listTest = new int[testlist.size()];
 		for(int i =0; i < listTest.length; i++)
 			listTest[i] = (int) testlist.toArray()[i]; //This has to be done because LinkedList.toArray() returns Comparable[]
 		assertArrayEquals(arrayTest,listTest); 
@@ -76,8 +76,27 @@ class LinkedListTest {
 		for(int i = 0; i< arrayTest.length; i++)
 			testlist.add(arrayTest[i]);
 		
+		assertEquals(LinkedList.checkLength(testlist),testlist.size());
 		assertEquals(3,testlist.remove(2));
-		assertEquals(arrayTest.length-1,testlist.getLength());
+		assertEquals(LinkedList.checkLength(testlist),testlist.size());
+		testlist.remove(2);
+		assertEquals(arrayTest.length-2,testlist.size());
+		
+		testlist.remove((Comparable) 2);
+		assertEquals(arrayTest.length-3,testlist.size());
+		
+		assertThrows(ArrayIndexOutOfBoundsException.class,()->{testlist.remove(-1);});
+	
+	}
+	
+	void toArrayTest() 
+	{
+		int[] arrayTest = {1,2,3,4,5,6,7,8,9,10};
+		int[] listTest;
+		testlist = new LinkedList();
+		for(int i = 0; i< arrayTest.length; i++)
+			testlist.add(arrayTest[i]);
+		testlist.remove(1);
 		
 	}
 	

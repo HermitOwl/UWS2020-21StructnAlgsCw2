@@ -4,32 +4,30 @@ public class LinkedList {
 
 	private Node head;
 	private LinkedList rest;// Because recursion is easier for me to understand for some reason
-	private Node current;
-	private Node previous;
-	private int length;
+
+	private int size;
 
 	public LinkedList() {
 		head = new Node();
-		current = head;
-		previous = new Node();
+
 		rest = null;
-		length = 0;
+		size = 0;
 	}
 
 	public LinkedList(Comparable payload) {
 		this.head = new Node(payload);
-		current = head;
+
 		rest = new LinkedList();
-		previous = new Node();
-		length = 1;
+
+		size = 1;
 	}
 
 	public LinkedList(Comparable payload, Node previous) {
 		this.head = new Node(payload);
-		current = head;
+
 		rest = new LinkedList();
-		this.previous = previous;
-		length = 1;
+
+		size = 1;
 	}
 
 	public void add(Comparable payload) {
@@ -44,13 +42,13 @@ public class LinkedList {
 						} else {
 							rest.add(payload);
 						}
-						length++;
+						size++;
 					}
 				}
 			} else {
 				head = new Node(payload);
 				rest = new LinkedList();
-				length++;
+				size++;
 			}
 
 		}
@@ -65,20 +63,21 @@ public class LinkedList {
 		return head;
 	}
 
-	public Comparable getCurrent() {
-		return current.getPayload();
-	}
-
-	public Comparable getPrevious() {
-		return previous.getPayload();
-	}
-
 	public LinkedList getRest() {
 		return rest;
 	}
-	
-	
 
+	public Comparable get(int index) {
+		Comparable temp;
+		if (index < 0 || index >= size)
+			throw new ArrayIndexOutOfBoundsException();
+		if (index == 0) {
+			temp = head.getPayload();
+		} else
+			temp = rest.get(index - 1);
+
+		return temp;
+	}
 
 	public boolean contains(Comparable payload) {
 		boolean temp = false;
@@ -96,7 +95,7 @@ public class LinkedList {
 	}
 
 	public Comparable[] toArray() {
-		Comparable[] temp = new Comparable[length];
+		Comparable[] temp = new Comparable[size];
 		Comparable[] restTemp;
 		if (rest != null) {
 
@@ -105,7 +104,7 @@ public class LinkedList {
 				temp[0] = head.getPayload();
 
 				restTemp = rest.toArray();
-				for (int i = 0; i < rest.getLength(); i++) {
+				for (int i = 0; i < rest.size(); i++) {
 					temp[i + 1] = restTemp[i];
 				}
 
@@ -119,53 +118,80 @@ public class LinkedList {
 	public Comparable remove(int index) {
 //TODO: fix the node removal
 		Comparable temp;
-		if (index < 0 || index >= length)
-			throw new ArrayIndexOutOfBoundsException();//borrowing the exception to  prevent poor index calls
+		if (index < 0 || index >= size)
+			throw new ArrayIndexOutOfBoundsException();// borrowing the exception to prevent poor index calls
 
 		if (index == 0) {
 			temp = head.getPayload();
-			this.remove(temp);
-			length--;
-		} else 
+			this.replaceElement(temp, reduceList(this.getListFrom(temp)));
+			size--;
+		} else {
 			temp = rest.remove(index - 1);
+			size--;
+		}
 		
 
 		return temp;
 
 	}
-
 	
-	public Comparable get(int index) 
+	
+	
+	private LinkedList getListFrom(Comparable payLoad) 
 	{
-		Comparable temp;
-		if (index < 0 || index >= length)
-			throw new ArrayIndexOutOfBoundsException();
-		if (index == 0) {
-			temp = head.getPayload();
-		} else 
-			temp = rest.get(index-1);
-			
-			return temp;
+		LinkedList templist = new LinkedList();
+		if(payLoad != null) {
+			if((head != null) && !head.isEmpty()) {
+				if(head.getPayload().equals(payLoad)) 
+				{
+					templist = this;
+				
+				}else 
+				{
+					templist = rest.getListFrom(payLoad);
+				}
+			}
+		}
+		
+		return templist;
 	}
+
 	public boolean remove(Comparable payload) {
-		//TODO: complete and fix the node removal
-		boolean temp =  false;
+		// TODO: complete and fix the node removal
+		boolean temp = this.contains(payload);
+		if(temp) {
+			this.replaceElement(payload, reduceList(this.getListFrom(payload)));
+			size--;
+		}
+		
 
-		
-		
 		return temp;
 
 	}
-	
-	private LinkedList reduceList(LinkedList list) 
-	{
-		LinkedList temp =  new LinkedList();
-		if(rest!=null)
-		temp = rest;
+
+	private LinkedList reduceList(LinkedList list) {
+		LinkedList temp = new LinkedList();
+		if (rest != null)
+			temp = rest;
 		return temp;
 	}
-	
 
+	private void replaceElement(Comparable searchTerm, LinkedList replacement) {
+		if (searchTerm != null) {
+			if ((head != null) && !head.isEmpty()) {
+				if (head.getPayload().equals(searchTerm)) {
+					this.rest = replacement.getRest();
+					this.head = replacement.getHeadNode();
+				} else {
+					if(rest != null) {
+						rest.replaceElement(searchTerm, replacement);
+					}
+
+				}
+			}
+		}
+
+	}
 
 	public static int checkLength(LinkedList l) {
 		int temp = 0;
@@ -176,8 +202,8 @@ public class LinkedList {
 		return temp;
 	}
 
-	public int getLength() {
-		return length;
+	public int size() {
+		return size;
 	}
 
 }

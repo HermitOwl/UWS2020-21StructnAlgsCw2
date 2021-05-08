@@ -5,7 +5,7 @@ package com.coursework2.dynamicdatatypes;
  *
  */
 public class BinaryTree {
-	// TODO: Complete all comments
+
 	/**
 	 * Binary Tree
 	 *
@@ -44,7 +44,7 @@ public class BinaryTree {
 
 	// Getter Methods
 	/**
-	 * getRoot()
+	 * 
 	 * 
 	 * @return Node rootNode
 	 */
@@ -60,7 +60,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * getLowNode()
+	 * 
 	 * 
 	 * @return BinaryTree low : Returns the Branch (BinrayTree) with Nodes less than
 	 *         the root Node
