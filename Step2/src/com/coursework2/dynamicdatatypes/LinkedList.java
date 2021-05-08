@@ -76,6 +76,9 @@ public class LinkedList {
 	public LinkedList getRest() {
 		return rest;
 	}
+	
+	
+
 
 	public boolean contains(Comparable payload) {
 		boolean temp = false;
@@ -117,7 +120,7 @@ public class LinkedList {
 //TODO: fix the node removal
 		Comparable temp;
 		if (index < 0 || index >= length)
-			throw new NullPointerException();//borrowing the exception to  prevent poor index calls
+			throw new ArrayIndexOutOfBoundsException();//borrowing the exception to  prevent poor index calls
 
 		if (index == 0) {
 			temp = head.getPayload();
@@ -131,6 +134,19 @@ public class LinkedList {
 
 	}
 
+	
+	public Comparable get(int index) 
+	{
+		Comparable temp;
+		if (index < 0 || index >= length)
+			throw new ArrayIndexOutOfBoundsException();
+		if (index == 0) {
+			temp = head.getPayload();
+		} else 
+			temp = rest.get(index-1);
+			
+			return temp;
+	}
 	public boolean remove(Comparable payload) {
 		//TODO: complete and fix the node removal
 		boolean temp =  false;
